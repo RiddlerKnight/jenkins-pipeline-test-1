@@ -12,9 +12,19 @@ pipeline {
         }
         stage('Doxygen') {
             steps {
+                sh """
+                    #!/bin/bash
+                    cat <<EOF > Doxyfile
+                    PROJECT_NAME        = "GRPC"
+                    INPUT               = "./src"
+                    OUTPUT_DIRECTORY    = "out"
+                    GENERATE_HTML       = "YES"
+                    GENERATE_LATEX      = "NO"
+                    RECURSIVE           = YES
+                    FILE_PATTERNS       = *
+                    """
+
                 sh "doxygen Doxyfile"
-                // echo "List file"
-                // sh "ls -la"
                 sh "tar -czvf doc.tar.gz out/html "
             }
         }
