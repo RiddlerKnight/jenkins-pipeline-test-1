@@ -28,10 +28,41 @@ They store architecture images and pdf files so that it is more convenient to re
 LFS refers to Git Large File Storage.
 
 Git can store not only code. It can store videos or binary files so that developers can work with big assets in the manner of version control style. \
-Nowadays, I have seeing many developers use it to store the LLM/SLM model in git repository so that be convenient to use.
+Nowadays, I have seeing many developers use it to store the LLM/SLM models in git repository so that be convenient to use.
 
-LFS help to efficiently handle the large files by separating LFS storage from code storage to keep repo lean.
+LFS help to efficiently handle the large files by separating LFS storage from code storage to keep repo lean with lightweight pointer inside the Git repo.
 
 Without LFS every clone or fetch pulls the full history of large files, it will slow down even if you don’t need them.
 
 #### How to adjust this repository to support LFS?
+
+1. Install git-lfs in to your PC
+
+2. Add LFS tracking rules
+
+Decide which files belong in LFS (by extension or path), then create/update `.gitattributes`
+
+Create `.gitattributes` then define the rules.
+
+```text
+# From the repo root
+git lfs track "*.psd"
+git lfs track "*.zip"
+git lfs track "*.mp4"
+git lfs track "assets/binaries/**"
+```
+
+commit the `.gitattributes` file.
+
+```bash
+git add .gitattributes
+git commit -m "Enable Git LFS for large/binary assets"
+```
+
+then commit large files as usual
+
+```bash
+git add path/to/large-file.mp4
+git commit -m "Add video asset via LFS"
+git push
+```
