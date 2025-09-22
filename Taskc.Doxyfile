@@ -1,0 +1,8 @@
+PROJECT_NAME        = "GRPC"
+INPUT               = "./src"
+OUTPUT_DIRECTORY    = "out"
+GENERATE_HTML       = "NO"
+GENERATE_LATEX      = "NO"
+RECURSIVE           = YES
+FILE_PATTERNS       = *
+WARN_LOGFILE  =  doxy.log
